@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, featured = false }) => {
   const { title, subtitle, slug, date, picture } = post.fields
 
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -10,35 +10,64 @@ const PostCard = ({ post }) => {
     day: 'numeric',
   })
 
-  return (
-    <li className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  const imageUrl = picture?.fields?.file?.url
+    ? `https:${picture.fields.file.url}`
+    : 'https://source.unsplash.com/random/480x360?fallback'
+
+  if (featured) {
+    return (
       <Link
-        href={`/posts/${slug}`}
-        className="block"
+        href={`/Posts/${slug}`}
+        className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-white"
       >
-        {/* Picture */}
-        {picture?.fields?.file?.url && (
-          <div className="relative h-48 w-full">
+        <div className="lg:col-span-7">
+          <div className="relative w-full h-64 sm:h-96">
             <Image
-              src={`https:${picture.fields.file.url}`}
-              alt={picture.fields.title || title}
+              src={imageUrl}
+              alt={picture?.fields?.title || title}
               fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
-              priority={false}
+              className="object-cover rounded dark:bg-gray-500"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           </div>
-        )}
-
-        {/* Content */}
-        <div className="p-5">
-          <h2 className="text-lg font-bold text-stone-800 mb-1">{title}</h2>
-          <p className="text-stone-600 mb-2">{subtitle}</p>
-          <p className="text-sm text-stone-400">{formattedDate}</p>
+        </div>
+        <div className="p-6 space-y-2 lg:col-span-5">
+          <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">
+            {title}
+          </h3>
+          <span className="text-xs dark:text-gray-600">{formattedDate}</span>
+          <p>{subtitle}</p>
         </div>
       </Link>
-    </li>
+    )
+  }
+
+  return (
+    <Link
+      href={`/Posts/${slug}`}
+      className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-white"
+    >
+      <div>
+        <div className="relative w-full h-44">
+          <Image
+            src={imageUrl}
+            alt={picture?.fields?.title || title}
+            fill
+            className="object-cover rounded dark:bg-gray-500"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </div>
+
+        <div className="p-6 space-y-2">
+          <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
+            {title}
+          </h3>
+          <span className="text-xs dark:text-gray-600">{formattedDate}</span>
+          <p>{subtitle}</p>
+        </div>
+      </div>
+    </Link>
   )
 }
-
 export default PostCard;

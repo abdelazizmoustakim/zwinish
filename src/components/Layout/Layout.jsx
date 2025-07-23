@@ -33,6 +33,14 @@ const Layout = ({ children }) => {
                 Posts
               </Link>
             </li>
+            <li>
+              <Link
+                href="/Faq"
+                className="text-sm font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+              >
+                Faq
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>
