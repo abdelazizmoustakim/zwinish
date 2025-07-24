@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
           <div className="text-2xl font-bold text-stone-600 tracking-wider">
             <Link
               href="/"
-              className="hover:text-stone-800 transition-colors duration-300"
+              className=" ml-20 text-3xl font-bold text-cyan-400 hover:text-indigo-800 transition-colors duration-300"
             >
               Zwinish
             </Link>
@@ -47,6 +47,8 @@ const Layout = ({ children }) => {
 
       <main className="container mx-auto p-8">{children}</main>
 
+
+      {/*  this the footerr part */}
       <footer className="bg-stone-100 text-sm font-medium uppercase text-stone-400 px-8 py-4">
         <div className="container mx-auto text-center">
           <p>Footer</p>
@@ -56,4 +58,4 @@ const Layout = ({ children }) => {
   )
 }
 
-export default Layout
+export default Layout;
