@@ -2,7 +2,7 @@ import React from 'react'
 
 const Faq = () => {
   return (
-    <section className="bg-white text-gray-800">
+    <section className="bg-white text-gray-800 mb-20">
       <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
         <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">How it works</p>
         <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">Frequently Asked Questions</h2>
@@ -42,18 +42,15 @@ const Faq = () => {
               For now, Zwinish is a solo project — but we’re always open to collaborations, guest posts, and feedback. If you've got a cool idea or story, slide into the DMs or hit us up through the contact page.
             </p>
           </div>
-
           <div>
             <h3 className="font-semibold">Why the name “Zwinish”?</h3>
             <p className="mt-1 text-gray-600">
               “Zwin” means “cool” or “awesome” in Moroccan Arabic — and Zwinish is all about celebrating what’s dope, creative, and worth sharing. It’s local flavor with a global vibe.
             </p>
           </div>
-
         </div>
       </div>
     </section>
   )
 }
-
-export default Faq
+export default Faq;

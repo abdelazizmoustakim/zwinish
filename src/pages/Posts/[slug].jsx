@@ -7,7 +7,6 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 const renderOptions = {
   renderNode: {
     [BLOCKS.DOCUMENT]: (_, children) => <>{children}</>,
-
     [BLOCKS.HEADING_1]: (_, children) => (
       <h1 className="text-4xl font-extrabold mb-4 mt-8">{children}</h1>
     ),
@@ -26,7 +25,6 @@ const renderOptions = {
     [BLOCKS.HEADING_6]: (_, children) => (
       <h6 className="text-base font-medium mb-1 mt-1">{children}</h6>
     ),
-
     [BLOCKS.PARAGRAPH]: (_, children) => (
       <p className="mb-4 leading-relaxed text-gray-800">{children}</p>
     ),
@@ -35,9 +33,7 @@ const renderOptions = {
         {children}
       </blockquote>
     ),
-    [BLOCKS.HR]: () => (
-      <hr className="my-8 border-t border-gray-300" />
-    ),
+    [BLOCKS.HR]: () => <hr className="my-8 border-t border-gray-300" />,
     [BLOCKS.UL_LIST]: (_, children) => (
       <ul className="list-disc list-inside mb-4">{children}</ul>
     ),
@@ -45,7 +41,6 @@ const renderOptions = {
       <ol className="list-decimal list-inside mb-4">{children}</ol>
     ),
     [BLOCKS.LIST_ITEM]: (_, children) => <li className="mb-1">{children}</li>,
-
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const url = node?.data?.target?.fields?.file?.url
       const alt = node?.data?.target?.fields?.title || 'Embedded image'
@@ -61,7 +56,6 @@ const renderOptions = {
         </div>
       )
     },
-
     [INLINES.HYPERLINK]: (node, children) => (
       <a
         href={node.data.uri}
@@ -72,7 +66,6 @@ const renderOptions = {
         {children}
       </a>
     ),
-
     [INLINES.ENTRY_HYPERLINK]: (node, children) => (
       <a
         href={`/${node.data.target.fields.slug}`}
@@ -81,7 +74,6 @@ const renderOptions = {
         {children}
       </a>
     ),
-
     [INLINES.ASSET_HYPERLINK]: (node, children) => {
       const url = node.data?.target?.fields?.file?.url
       return url ? (
@@ -172,7 +164,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: 'blocking', // Better for SEO
+    fallback: false, // ❗️ No ISR, fully static
   }
 }
 
@@ -194,8 +186,6 @@ export async function getStaticProps({ params }) {
     props: {
       post: res.items[0],
     },
-    revalidate: 60,
   }
 }
-
 export default Post;
