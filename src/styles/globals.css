@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @layer base {
   #__next {
@@ -8,10 +8,25 @@
 
   html {
     @apply h-full scroll-smooth antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   body {
-    @apply flex h-full flex-col text-stone-600;
+    @apply flex h-full flex-col text-gray-700 bg-white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
   }
 
   main {
@@ -28,5 +43,29 @@
 
   .title {
     @apply font-bold tracking-tight;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Custom prose styles for better typography */
+  .prose {
+    @apply text-gray-700;
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply text-gray-900 font-semibold;
+  }
+
+  .prose p {
+    @apply text-gray-700 leading-7;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .prose blockquote {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .prose code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
   }
 }
