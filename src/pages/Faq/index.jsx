@@ -7,50 +7,53 @@ const Faq = () => {
         <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">How it works</p>
         <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">Frequently Asked Questions</h2>
         <div className="grid gap-10 md:gap-8 sm:p-3 md:grid-cols-2 lg:px-12 xl:px-32">
-          
+
           <div>
-            <h3 className="font-semibold">What is Zwinish?</h3>
+            <h3 className="font-semibold">What is Zwinish really about?</h3>
             <p className="mt-1 text-gray-600">
-              Zwinish is a sleek, modern blogging platform built by a Moroccan software engineer with a passion for storytelling, code, and culture. It’s a space where high-quality content meets strong opinions, clean design, and purposeful writing.
+              Zwinish is your corner of the internet where life meets ideas. It’s not just tech talk — it’s stories, culture, growth, and opinions from a young Moroccan’s lens on the world. It’s all about real talk and meaningful vibes.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold">What kind of content does Zwinish offer?</h3>
+            <h3 className="font-semibold">What kind of topics can I expect?</h3>
             <p className="mt-1 text-gray-600">
-              We talk about *everything*: tech, software engineering, cybersecurity, deep dives into dev culture, personal growth, Morocco's digital future, and even the occasional spicy take on the industry. If it's real, smart, and worth reading — it belongs on Zwinish.
+              Expect everything from deep life lessons, mindset shifts, cultural reflections, personal growth hacks, to tech as just one part of the bigger picture. If it moves you or makes you think — it belongs here.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold">Who is behind Zwinish?</h3>
+            <h3 className="font-semibold">Who’s behind this vibe?</h3>
             <p className="mt-1 text-gray-600">
-              Zwinish was founded and is maintained by a 20-year-old Moroccan full-stack dev & cybersecurity student. It’s more than a blog — it’s a personal mission to elevate voices, ideas, and creativity from the next-gen tech community.
+              Just a 20-year-old Moroccan with a passion for sharing what matters — a student, coder, dreamer, and storyteller who believes tech is cool but life is cooler.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold">Is the content really high quality?</h3>
+            <h3 className="font-semibold">Is this blog curated or just random thoughts?</h3>
             <p className="mt-1 text-gray-600">
-              Absolutely. Every post is curated with intention. No fluff, no clickbait. Just strong, thoughtful writing powered by real experience, curiosity, and a deep love for clean code and meaningful ideas.
+              Every piece is intentional — no fluff, no noise. Just raw, honest, and thoughtful content meant to inspire, challenge, and connect.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold">Can I contribute to Zwinish?</h3>
+            <h3 className="font-semibold">Can I contribute or share my story?</h3>
             <p className="mt-1 text-gray-600">
-              For now, Zwinish is a solo project — but we’re always open to collaborations, guest posts, and feedback. If you've got a cool idea or story, slide into the DMs or hit us up through the contact page.
+              Right now, it’s a one-person show, but collabs and guest stories are welcome. Got a story or idea that fits the vibe? Hit me up anytime.
             </p>
           </div>
+
           <div>
             <h3 className="font-semibold">Why the name “Zwinish”?</h3>
             <p className="mt-1 text-gray-600">
-              “Zwin” means “cool” or “awesome” in Moroccan Arabic — and Zwinish is all about celebrating what’s dope, creative, and worth sharing. It’s local flavor with a global vibe.
+              “Zwin” means “cool” or “awesome” in Moroccan Darija. Zwinish is about celebrating the good stuff in life — the culture, the ideas, the people, and everything that makes us say “that’s dope.”
             </p>
           </div>
+
         </div>
       </div>
     </section>
   )
 }
+
 export default Faq;
