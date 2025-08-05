@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Navbar from '../Nav/Navbar';
 import Footer from '../Footer/Footer';
+
 const Layout = ({ children }) => {
   return (
     <>
