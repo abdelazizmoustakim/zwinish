@@ -17,18 +17,18 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className="py-2">
       <nav className="container mx-auto flex flex-col sm:flex-row items-center justify-between px-4 sm:px-0">
         
         {/* Logo and Mobile Menu Button */}
-        <div className="flex items-center justify-between w-full sm:w-auto sm:ml-20">
+        <div className="flex items-center justify-between w-full sm:w-auto sm:ml-8">
           <Link href="/">
             <Image
               src={img1}
               alt="Zwinish Logo"
               className="hover:opacity-80 transition-opacity duration-300"
-              width={169}
-              height={120}
+              width={140}
+              height={99}
               priority
             />
           </Link>
@@ -36,20 +36,20 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="sm:hidden p-2 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
+            className="sm:hidden p-1.5 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
             aria-label="Toggle mobile menu"
           >
-            <FiMenu className="w-6 h-6" />
+            <FiMenu className="w-5 h-5" />
           </button>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden sm:flex items-center gap-6">
-          <ul className="flex gap-6">
+        <div className="hidden sm:flex items-center gap-4">
+          <ul className="flex gap-4">
             <li>
               <Link
                 href="/"
-                className="text-sm font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Home
               </Link>
@@ -57,7 +57,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/Posts"
-                className="text-sm font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Posts
               </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/Faq"
-                className="text-sm font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Faq
               </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/Zwinish+"
-                className="text-sm font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Zwinish +
               </Link>
@@ -81,9 +81,9 @@ export default function Navbar() {
           </ul>
           
           {/* User Icon */}
-          <div className="ml-4">
-            <Link href="/profile" className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
-              <AiOutlineUser className="w-5 h-5 text-stone-600" />
+          <div className="ml-3">
+            <Link href="/profile" className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+              <AiOutlineUser className="w-4 h-4 text-stone-600" />
             </Link>
           </div>
         </div>
@@ -99,25 +99,26 @@ export default function Navbar() {
           />
           
           {/* Sidebar */}
-          <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
+          <div className="fixed right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
             {/* Sidebar Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-base font-semibold text-stone-800">Menu</h2>
               <button
                 onClick={closeMobileMenu}
-                className="p-2 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
+                className="p-1.5 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
                 aria-label="Close mobile menu"
               >
-                <FiX className="w-6 h-6" />
+                <FiX className="w-5 h-5" />
               </button>
             </div>
             
             {/* Sidebar Navigation */}
-            <div className="p-6">
-              <ul className="space-y-4">
+            <div className="p-4">
+              <ul className="space-y-3">
                 <li>
                   <Link
                     href="/"
-                    className="block text-lg font-medium text-stone-600 hover:text-stone-800 transition-colors py-3 border-b border-gray-100"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
                     Home
@@ -126,7 +127,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/Posts"
-                    className="block text-lg font-medium text-stone-600 hover:text-stone-800 transition-colors py-3 border-b border-gray-100"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
                     Posts
@@ -135,7 +136,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/Faq"
-                    className="block text-lg font-medium text-stone-600 hover:text-stone-800 transition-colors py-3 border-b border-gray-100"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
                     Faq
@@ -144,7 +145,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/Zwinish+"
-                    className="block text-lg font-medium text-stone-600 hover:text-stone-800 transition-colors py-3 border-b border-gray-100"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
                     Zwinish +
@@ -153,14 +154,14 @@ export default function Navbar() {
               </ul>
               
               {/* User Icon in Sidebar */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
+              <div className="mt-6 pt-4 border-t border-gray-200">
                 <Link 
                   href="/profile" 
-                  className="flex items-center gap-3 text-lg font-medium text-stone-600 hover:text-stone-800 transition-colors"
+                  className="flex items-center gap-3 text-base font-medium text-stone-600 hover:text-stone-800 transition-colors"
                   onClick={closeMobileMenu}
                 >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100">
-                    <AiOutlineUser className="w-5 h-5" />
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100">
+                    <AiOutlineUser className="w-4 h-4" />
                   </div>
                   Profile
                 </Link>
