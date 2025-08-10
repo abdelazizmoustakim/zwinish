@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://zwinish.com/sitemap.xml
+
+# Disallow directory listings and sensitive files
+Disallow: /out/
+Disallow: /*.zip
+Disallow: /*.tar
+Disallow: /*.gz
+Disallow: /api/
+Disallow: /_next/
+Disallow: /.env*
+
+# Allow important pages
+Allow: /
+Allow: /Posts/
+Allow: /Faq/
+Allow: /Zwinish+/
+Allow: /login
+Allow: /signup
+Allow: /profile
