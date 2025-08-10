@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Logo + Legal Links */}
         <div className="flex flex-row pr-3 space-x-6 sm:space-x-8 items-center">
           <div className="flex items-center justify-center w-12 h-12">
-            <Image src={logo} alt="Zwinish Logo" width={40} height={40} />
+            <Image src={logo} alt="Zwinish Logo" width={60} height={60} />
           </div>
           <ul className="flex gap-4 text-sm font-medium">
             <li>
@@ -22,17 +22,7 @@ export default function Footer() {
           </ul>
         </div>
         {/* Social Links */}
-        <ul className="flex gap-4 text-sm font-medium pl-3">
-          <li>
-            <Link href="https://instagram.com" target="_blank" className="hover:text-pink-500 transition">Instagram</Link>
-          </li>
-          <li>
-            <Link href="https://facebook.com" target="_blank" className="hover:text-blue-600 transition">Facebook</Link>
-          </li>
-          <li>
-            <Link href="https://twitter.com" target="_blank" className="hover:text-sky-500 transition">Twitter</Link>
-          </li>
-        </ul>
+      
       </div>
     </footer>
   );

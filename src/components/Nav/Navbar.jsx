@@ -78,14 +78,7 @@ export default function Navbar() {
                 Posts
               </Link>
             </li>
-            <li>
-              <Link
-                href="/Faq"
-                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
-              >
-                Faq
-              </Link>
-            </li>
+           
             <li>
               <Link
                 href="/Zwinish+"
@@ -188,43 +181,43 @@ export default function Navbar() {
             {/* Sidebar Navigation */}
             <div className="p-4">
               <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="/"
+          <li>
+            <Link
+              href="/"
                     className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/Posts"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/Posts"
                     className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
-                  >
-                    Posts
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/Faq"
+            >
+              Posts
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/Faq"
                     className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
-                  >
-                    Faq
-                  </Link>
-                </li>
-                <li>
-                  <Link
+            >
+              Faq
+            </Link>
+          </li>
+          <li>
+            <Link
                     href="/Zwinish+"
                     className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
-                  >
+            >
                     Zwinish +
-                  </Link>
-                </li>
-              </ul>
+            </Link>
+          </li>
+        </ul>
               
                {/* User Options in Sidebar */}
               <div className="mt-6 pt-4 border-t border-gray-200">

@@ -14,9 +14,9 @@ const Homepage = () => {
            <Link href="/Posts" className="px-6 py-3 text-sm sm:text-base font-semibold rounded bg-gray-600 text-white hover:bg-gray-700 transition duration-300">
              Start reading
            </Link>
-           <button className="px-6 py-3 text-sm sm:text-base font-semibold rounded border border-gray-300 text-gray-800 hover:bg-gray-100 transition duration-300">
+           <Link href="/learn-more" className="px-6 py-3 cursor-pointer text-sm sm:text-base font-semibold rounded border border-gray-300 text-gray-800 hover:bg-gray-100 transition duration-300">
              Learn More
-           </button>
+           </Link>
          </div>
       </div>
     </section>
