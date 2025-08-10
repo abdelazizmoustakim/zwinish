@@ -69,14 +69,10 @@ const Login = () => {
           formData.password
         );
         
-        console.log('User signed in successfully:', userCredential.user);
-        
         // Redirect to home page or dashboard
         router.push('/');
         
       } catch (error) {
-        console.error('Login error:', error);
-        
         // Handle specific Firebase auth errors
         switch (error.code) {
           case 'auth/user-not-found':

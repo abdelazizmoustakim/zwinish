@@ -60,7 +60,6 @@ export default function ProfilePage() {
       // Clear success message after 3 seconds
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
-      console.error('Error updating profile:', err);
       setError('Failed to update profile. Please try again.');
     } finally {
       setSaving(false);
@@ -72,7 +71,7 @@ export default function ProfilePage() {
       await signOut();
       router.push('/');
     } catch (err) {
-      console.error('Error signing out:', err);
+      // Handle sign out error silently
     }
   };
 

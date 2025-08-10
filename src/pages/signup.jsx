@@ -41,7 +41,7 @@ export default function SignupPage() {
           createdAt: serverTimestamp(),
         })
       } catch (firestoreErr) {
-        console.warn('Failed to write user profile to Firestore:', firestoreErr)
+        // Firestore write failed silently - user already has success message
       }
     } catch (err) {
       setError(err.message || 'Failed to sign up')
