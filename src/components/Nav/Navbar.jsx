@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import img1 from "../../assets/logo.png";
 import { AiOutlineUser } from "react-icons/ai";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const { user, signOut } = useAuth();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -15,6 +19,25 @@ export default function Navbar() {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
+  };
+
+  const closeUserDropdown = () => {
+    setIsUserDropdownOpen(false);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsUserDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="py-2">
@@ -46,14 +69,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden sm:flex items-center gap-4">
           <ul className="flex gap-4">
-            <li>
-              <Link
-                href="/"
-                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
-              >
-                Home
-              </Link>
-            </li>
+            
             <li>
               <Link
                 href="/Posts"
@@ -80,11 +96,68 @@ export default function Navbar() {
             </li>
           </ul>
           
-          {/* User Icon */}
-          <div className="ml-3">
-            <Link href="/profile" className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+          {/* User Icon / Account Dropdown */}
+          <div className="ml-3 relative" ref={dropdownRef}>
+            <button
+              onClick={toggleUserDropdown}
+              className="flex items-center gap-2 rounded-full px-3 h-8 bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
+            >
               <AiOutlineUser className="w-4 h-4 text-stone-600" />
-            </Link>
+              {user ? (
+                <span className="text-xs font-medium text-stone-700 max-w-[120px] truncate">{user.name || user.email}</span>
+              ) : (
+                <span className="text-xs font-medium text-stone-700">Account</span>
+              )}
+              <FiChevronDown className="w-4 h-4 text-stone-500" />
+            </button>
+
+            {/* Dropdown Menu */}
+            {isUserDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+                <div className="py-1">
+                  {user ? (
+                    <>
+                      <div className="px-4 py-2 text-xs text-stone-500">Signed in as</div>
+                      <div className="px-4 pb-2 text-xs font-semibold text-stone-800 truncate">{user.name}</div>
+                      <div className="my-1 border-t border-gray-100" />
+                      <Link
+                        href="/profile"
+                        className="block px-4 py-2 text-xs text-stone-600 hover:bg-gray-50 hover:text-stone-800 transition-colors"
+                        onClick={closeUserDropdown}
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors"
+                        onClick={() => {
+                          signOut();
+                          closeUserDropdown();
+                        }}
+                      >
+                        Sign out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/signup"
+                        className="block px-4 py-2 text-xs text-stone-600 hover:bg-gray-50 hover:text-stone-800 transition-colors"
+                        onClick={closeUserDropdown}
+                      >
+                        Sign Up
+                      </Link>
+                      <Link
+                        href="/login"
+                        className="block px-4 py-2 text-xs text-stone-600 hover:bg-gray-50 hover:text-stone-800 transition-colors"
+                        onClick={closeUserDropdown}
+                      >
+                        Log In
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
@@ -153,18 +226,50 @@ export default function Navbar() {
                 </li>
               </ul>
               
-              {/* User Icon in Sidebar */}
+               {/* User Options in Sidebar */}
               <div className="mt-6 pt-4 border-t border-gray-200">
-                <Link 
-                  href="/profile" 
-                  className="flex items-center gap-3 text-base font-medium text-stone-600 hover:text-stone-800 transition-colors"
-                  onClick={closeMobileMenu}
-                >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100">
-                    <AiOutlineUser className="w-4 h-4" />
-                  </div>
-                  Profile
-                </Link>
+                 <div className="space-y-2">
+                   {user ? (
+                     <>
+                       <div className="text-sm text-stone-500">Signed in as</div>
+                       <div className="text-base font-semibold text-stone-800 truncate">{user.name || user.email}</div>
+                       <div className="my-2 border-t border-gray-100" />
+                       <Link 
+                         href="/profile" 
+                         className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+                         onClick={closeMobileMenu}
+                       >
+                         Profile
+                       </Link>
+                       <button
+                         className="w-full text-left text-base font-medium text-red-600 hover:text-red-700 transition-colors py-2"
+                         onClick={() => {
+                           signOut();
+                           closeMobileMenu();
+                         }}
+                       >
+                         Sign out
+                       </button>
+                     </>
+                   ) : (
+                     <>
+                       <Link 
+                         href="/signup" 
+                         className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+                         onClick={closeMobileMenu}
+                       >
+                         Sign Up
+                       </Link>
+                       <Link 
+                         href="/login" 
+                         className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+                         onClick={closeMobileMenu}
+                       >
+                         Log In
+                       </Link>
+                     </>
+                   )}
+                 </div>
               </div>
             </div>
           </div>
