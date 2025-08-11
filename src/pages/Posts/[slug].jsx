@@ -1,6 +1,8 @@
 import React from 'react'
 import client from '../../../lib/contentful/client'
 import Image from 'next/image'
+import Link from 'next/link'
+import Head from 'next/head'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
@@ -106,12 +108,12 @@ const renderOptions = {
   },
 }
 
-const Post = ({ post }) => {
+const Post = ({ post, relatedPosts }) => {
   if (!post) {
-    return <p className="text-center mt-10 text-red-500">Post not found</p>
+    return <p className="text-center mt-10 text-gray-700">Post not found</p>
   }
 
-  const { title, subtitle, date, picture, content } = post.fields
+  const { title, subtitle, date, picture, content, slug } = post.fields
 
   const formattedDate = date
     ? new Date(date).toLocaleDateString('en-US', {
@@ -125,45 +127,192 @@ const Post = ({ post }) => {
     ? `https:${picture.fields.file.url}`
     : null
 
+  // SEO meta tags
+  const seoTitle = `${title} | Zwinish - Beautiful Blogging Platform`
+  const seoDescription = subtitle || `Read this thoughtful article about ${title.toLowerCase()} on Zwinish, a beautiful blogging platform for mature readers who appreciate quality content.`
+  const canonicalUrl = `https://zwinish.com/Posts/${slug}`
+  const ogImage = imageUrl || 'https://zwinish.com/og-image.png'
+
+  // Structured data for article
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": seoDescription,
+    "image": ogImage,
+    "author": {
+      "@type": "Organization",
+      "name": "Zwinish"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Zwinish",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://zwinish.com/logo.png"
+      }
+    },
+    "datePublished": date,
+    "dateModified": date,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Mature readers who appreciate quality content"
+    }
+  }
+
   return (
-    <article className="max-w-4xl mx-auto px-6 py-12 mt-8">
-      <header className="mb-12">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
-          {title}
-        </h1>
-        <div className="flex items-center text-gray-500 text-lg font-light mb-8">
-          <time dateTime={date} className="text-gray-600">
-            {formattedDate}
-          </time>
-        </div>
-      </header>
+    <>
+      <Head>
+        {/* Basic SEO */}
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={`${title}, blog, thoughtful content, mature readers, quality articles, zwinish, blogging platform`} />
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Zwinish" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:site" content="@zwinish" />
+        
+        {/* Article specific meta */}
+        <meta property="article:published_time" content={date} />
+        <meta property="article:modified_time" content={date} />
+        <meta property="article:author" content="Zwinish" />
+        <meta property="article:section" content="Blog" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        
+        {/* Additional SEO */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content="Zwinish" />
+        <meta name="language" content="English" />
+      </Head>
 
-      {imageUrl && (
-        <div className="relative w-full h-96 md:h-[500px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
-          <Image
-            src={imageUrl}
-            alt={picture?.fields?.title || title}
-            fill
-            className="object-cover rounded-2xl"
-            priority
-          />
-        </div>
-      )}
+      <div className=''>
+        <article className="max-w-4xl mx-auto px-6 py-12 mt-8">
+          <header className="mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
+              {title}
+            </h1>
+            <div className="flex items-center text-gray-500 text-lg font-light mb-8">
+              <time dateTime={date} className="text-gray-600">
+                {formattedDate}
+              </time>
+            </div>
+          </header>
 
-      {subtitle && (
-        <p className="mb-10 text-xl md:text-2xl text-gray-600 font-light leading-relaxed italic">
-          {subtitle}
-        </p>
-      )}
+          {imageUrl && (
+            <div className="relative w-full h-96 md:h-[500px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src={imageUrl}
+                alt={picture?.fields?.title || title}
+                fill
+                className="object-cover rounded-2xl"
+                priority
+              />
+            </div>
+          )}
 
-      {content ? (
-        <section className="prose prose-lg max-w-none">
-          {documentToReactComponents(content, renderOptions)}
-        </section>
-      ) : (
-        <p className="text-gray-500 text-lg">No content available.</p>
-      )}
-    </article>
+          {subtitle && (
+            <p className="mb-10 text-xl md:text-2xl text-gray-600 font-light leading-relaxed italic">
+              {subtitle}
+            </p>
+          )}
+
+          {content ? (
+            <section className="prose text-gray-700 prose-lg max-w-none">
+              {documentToReactComponents(content, renderOptions)}
+            </section>
+          ) : (
+            <p className="text-gray-500 text-lg">No content available.</p>
+          )}
+        </article>
+
+        {/* Related Posts Section */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <section className="max-w-6xl mx-auto px-6 py-16 bg-white">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {relatedPosts.map((relatedPost) => {
+                const { title, subtitle, date, picture, slug } = relatedPost.fields
+                const relatedImageUrl = picture?.fields?.file?.url
+                  ? `https:${picture.fields.file.url}`
+                  : null
+                const relatedFormattedDate = date
+                  ? new Date(date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })
+                  : 'No date'
+
+                return (
+                  <Link 
+                    key={relatedPost.sys.id} 
+                    href={`/Posts/${slug}`}
+                    className="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      {relatedImageUrl ? (
+                        <Image
+                          src={relatedImageUrl}
+                          alt={picture?.fields?.title || title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                          <span className="text-4xl text-gray-400">📄</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="p-6">
+                      <time className="text-sm text-gray-500 font-medium">
+                        {relatedFormattedDate}
+                      </time>
+                      <h3 className="text-xl font-semibold text-gray-900 mt-2 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        {title}
+                      </h3>
+                      {subtitle && (
+                        <p className="text-gray-600 text-sm line-clamp-3">
+                          {subtitle}
+                        </p>
+                      )}
+                      <div className="mt-4 flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
+                        Read more
+                        <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          </section>
+        )}
+        
+      </div>
+    </>
   )
 }
 
@@ -193,9 +342,21 @@ export async function getStaticProps({ params }) {
       notFound: true,
     }
   }
+
+  const currentPost = res.items[0]
+
+  // Fetch related posts (excluding the current post)
+  const relatedPostsRes = await client.getEntries({
+    content_type: 'zwinish',
+    'fields.slug[ne]': slug, // Exclude current post
+    limit: 6, // Limit to 6 related posts
+    order: '-sys.createdAt', // Most recent first
+  })
+
   return {
     props: {
-      post: res.items[0],
+      post: currentPost,
+      relatedPosts: relatedPostsRes.items || [],
     },
   }
 }

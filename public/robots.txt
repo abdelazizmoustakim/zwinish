@@ -4,20 +4,23 @@ Allow: /
 # Sitemap
 Sitemap: https://zwinish.com/sitemap.xml
 
-# Disallow directory listings and sensitive files
+# Disallow sensitive directories
 Disallow: /out/
 Disallow: /*.zip
-Disallow: /*.tar
-Disallow: /*.gz
 Disallow: /api/
 Disallow: /_next/
 Disallow: /.env*
+Disallow: /admin/
+Disallow: /private/
 
 # Allow important pages
-Allow: /
-Allow: /Posts/
-Allow: /Faq/
-Allow: /Zwinish+/
+Allow: /Posts
+Allow: /Posts/*
+Allow: /learn-more
+Allow: /Faq
+Allow: /Zwinish+
 Allow: /login
 Allow: /signup
-Allow: /profile
+
+# Crawl delay (optional)
+Crawl-delay: 1

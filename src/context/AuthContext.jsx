@@ -4,6 +4,7 @@ import { onAuthStateChanged, signOut as fbSignOut } from 'firebase/auth'
 
 const AuthContext = createContext({
   user: null,
+  loading: true,
   signIn: (_user) => {},
   signOut: () => {},
   setUser: (_user) => {},
@@ -11,6 +12,7 @@ const AuthContext = createContext({
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   // Sync Firebase auth state
   useEffect(() => {
@@ -25,6 +27,7 @@ export function AuthProvider({ children }) {
       } else {
         setUser(null)
       }
+      setLoading(false)
     })
     return () => unsub()
   }, [])
@@ -38,7 +41,7 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
-  const value = useMemo(() => ({ user, signIn, signOut, setUser }), [user])
+  const value = useMemo(() => ({ user, loading, signIn, signOut, setUser }), [user, loading])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
