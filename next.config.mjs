@@ -3,14 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['images.ctfassets.net'], // still needed if you're fetching images from Contentful
+    unoptimized: true, // Disable image optimization to avoid sharp issues
   },
   // Disable experimental features that might cause issues
   experimental: {
     optimizeCss: false,
-    optimizePackageImports: false,
   },
-  // Ensure we're using the stable build process
-  swcMinify: true,
   // Disable webpack 5 module resolution issues
   webpack: (config, { isServer }) => {
     // Fix for CSS processing issues
