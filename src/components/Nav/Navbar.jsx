@@ -116,157 +116,191 @@ export default function Navbar() {
     );
   };
 
-  return (
-    <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/logo.png"
-                alt="Zwinish Logo"
-                width={40}
-                height={40}
-                className="h-8 w-auto"
-              />
-              <span className="ml-2 text-xl font-bold text-gray-900">Zwinish</span>
-            </Link>
-          </div>
+  const renderMobileUserContent = () => {
+    if (loading) {
+      return (
+        <div className="space-y-2">
+          <div className="text-sm text-stone-500">Loading...</div>
+        </div>
+      );
+    }
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Home
-              </Link>
+    return (
+      <div className="space-y-2">
+        {user ? (
+          <>
+            <div className="text-sm text-stone-500">Signed in as</div>
+            <div className="text-base font-semibold text-stone-800 truncate">{user.name || user.email}</div>
+            <div className="my-2 border-t border-gray-100" />
+            <Link 
+              href="/profile" 
+              className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+              onClick={closeMobileMenu}
+            >
+              Profile
+            </Link>
+            <button
+              className="w-full text-left text-base font-medium text-red-600 hover:text-red-700 transition-colors py-2"
+              onClick={() => {
+                signOut();
+                closeMobileMenu();
+              }}
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <>
+            <Link 
+              href="/signup" 
+              className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+              onClick={closeMobileMenu}
+            >
+              Sign Up
+            </Link>
+            <Link 
+              href="/login" 
+              className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2"
+              onClick={closeMobileMenu}
+            >
+              Log In
+            </Link>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className="py-2">
+      <nav className="container mx-auto flex flex-col sm:flex-row items-center justify-between px-4 sm:px-0">
+        
+        {/* Logo and Mobile Menu Button */}
+        <div className="flex items-center justify-between w-full sm:w-auto sm:ml-8">
+          <Link href="/">
+            <Image
+              src="/logo.png"
+              alt="Zwinish Logo"
+              className="hover:opacity-80 transition-opacity duration-300"
+              width={140}
+              height={99}
+              priority
+            />
+          </Link>
+          
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="sm:hidden p-1.5 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            <FiMenu className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden sm:flex items-center gap-4">
+          <ul className="flex gap-4">
+            
+            <li>
               <Link
                 href="/Posts"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Posts
               </Link>
-              <Link
-                href="/learn-more"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Learn More
-              </Link>
+            </li>
+           
+            <li>
               <Link
                 href="/Zwinish+"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
               >
                 Zwinish +
               </Link>
-            </div>
-          </div>
-
-          {/* User Menu */}
-          <div className="hidden md:block relative" ref={dropdownRef}>
+            </li>
+          </ul>
+          
+          {/* User Icon / Account Dropdown */}
+          <div className="ml-3 relative" ref={dropdownRef}>
             {renderUserContent()}
             {renderDropdownMenu()}
           </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMobileMenuOpen ? (
-                <FiX className="block h-6 w-6" />
-              ) : (
-                <FiMenu className="block h-6 w-6" />
-              )}
-            </button>
-          </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Sidebar Overlay */}
       {isMobileMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-            <Link
-              href="/"
-              className="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-              onClick={closeMobileMenu}
-            >
-              Home
-            </Link>
-            <Link
-              href="/Posts"
-              className="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-              onClick={closeMobileMenu}
-            >
-              Posts
-            </Link>
-            <Link
-              href="/learn-more"
-              className="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-              onClick={closeMobileMenu}
-            >
-              Learn More
-            </Link>
-            <Link
-              href="/Zwinish+"
-              className="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-              onClick={closeMobileMenu}
-            >
-              Zwinish +
-            </Link>
+        <div className="fixed inset-0 z-50 sm:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
+            onClick={closeMobileMenu}
+          />
+          
+          {/* Sidebar */}
+          <div className="fixed right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-base font-semibold text-stone-800">Menu</h2>
+              <button
+                onClick={closeMobileMenu}
+                className="p-1.5 rounded-md text-stone-600 hover:text-stone-800 hover:bg-gray-100 transition-colors"
+                aria-label="Close mobile menu"
+              >
+                <FiX className="w-5 h-5" />
+              </button>
+            </div>
             
-            {/* Mobile User Menu */}
-            <div className="pt-4 border-t border-gray-200">
-              {user ? (
-                <div className="px-3 py-2">
-                  <div className="text-sm text-gray-500">Signed in as</div>
-                  <div className="text-sm font-semibold text-gray-800">{user.name || user.email}</div>
-                  <div className="mt-2 space-y-1">
-                    <Link
-                      href="/profile"
-                      className="block text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                      onClick={closeMobileMenu}
-                    >
-                      Profile
-                    </Link>
-                    <button
-                      className="block w-full text-left text-sm text-red-600 hover:text-red-800 transition-colors"
-                      onClick={() => {
-                        signOut();
-                        closeMobileMenu();
-                      }}
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="px-3 py-2 space-y-1">
+            {/* Sidebar Navigation */}
+            <div className="p-4">
+              <ul className="space-y-3">
+                <li>
                   <Link
-                    href="/signup"
-                    className="block text-sm text-gray-700 hover:text-gray-900 transition-colors"
+                    href="/"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
-                    Sign Up
+                    Home
                   </Link>
+                </li>
+                <li>
                   <Link
-                    href="/login"
-                    className="block text-sm text-gray-700 hover:text-gray-900 transition-colors"
+                    href="/Posts"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
                   >
-                    Log In
+                    Posts
                   </Link>
-                </div>
-              )}
+                </li>
+                <li>
+                  <Link
+                    href="/Faq"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
+                    onClick={closeMobileMenu}
+                  >
+                    Faq
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/Zwinish+"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
+                    onClick={closeMobileMenu}
+                  >
+                    Zwinish +
+                  </Link>
+                </li>
+              </ul>
+              
+              {/* User Options in Sidebar */}
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                {renderMobileUserContent()}
+              </div>
             </div>
           </div>
         </div>
       )}
-    </nav>
+    </div>
   );
 }
