@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @layer base {
   #__next {
@@ -18,7 +17,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Quicksand', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.025em;
@@ -43,7 +42,7 @@
 
   .title {
     @apply font-bold tracking-tight;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Quicksand', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   /* Custom prose styles for better typography */
@@ -52,7 +51,7 @@
   }
 
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Quicksand', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     @apply text-gray-900 font-semibold;
   }
 
@@ -62,7 +61,7 @@
   }
 
   .prose blockquote {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Quicksand', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .prose code {

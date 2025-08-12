@@ -10,25 +10,25 @@ const renderOptions = {
   renderNode: {
     [BLOCKS.DOCUMENT]: (_, children) => <>{children}</>,
     [BLOCKS.HEADING_1]: (_, children) => (
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 mt-12 text-gray-900 leading-tight tracking-tight">{children}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 mt-12 text-gray-900 leading-tight tracking-tight">{children}</h1>
     ),
     [BLOCKS.HEADING_2]: (_, children) => (
-      <h2 className="text-3xl md:text-4xl font-semibold mb-5 mt-10 text-gray-900 leading-tight tracking-tight">{children}</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-5 mt-10 text-gray-900 leading-tight tracking-tight">{children}</h2>
     ),
     [BLOCKS.HEADING_3]: (_, children) => (
-      <h3 className="text-2xl md:text-3xl font-semibold mb-4 mt-8 text-gray-900 leading-tight">{children}</h3>
+      <h3 className="text-xl md:text-2xl font-semibold mb-4 mt-8 text-gray-900 leading-tight">{children}</h3>
     ),
     [BLOCKS.HEADING_4]: (_, children) => (
-      <h4 className="text-xl md:text-2xl font-medium mb-3 mt-6 text-gray-900 leading-tight">{children}</h4>
+      <h4 className="text-lg md:text-xl font-medium mb-3 mt-6 text-gray-900 leading-tight">{children}</h4>
     ),
     [BLOCKS.HEADING_5]: (_, children) => (
-      <h5 className="text-lg md:text-xl font-medium mb-3 mt-5 text-gray-900 leading-tight">{children}</h5>
+      <h5 className="text-base md:text-lg font-medium mb-3 mt-5 text-gray-900 leading-tight">{children}</h5>
     ),
     [BLOCKS.HEADING_6]: (_, children) => (
-      <h6 className="text-base md:text-lg font-medium mb-2 mt-4 text-gray-900 leading-tight">{children}</h6>
+      <h6 className="text-sm md:text-base font-medium mb-2 mt-4 text-gray-900 leading-tight">{children}</h6>
     ),
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p className="mb-6 leading-7 text-gray-700 text-lg font-light">{children}</p>
+      <p className="mb-6 leading-7 text-gray-800 text-lg font-normal">{children}</p>
     ),
     [BLOCKS.QUOTE]: (_, children) => (
       <blockquote className="border-l-4 border-blue-500 italic pl-6 my-8 text-gray-700 text-lg font-light bg-gray-50 py-4 rounded-r-lg">
@@ -37,10 +37,10 @@ const renderOptions = {
     ),
     [BLOCKS.HR]: () => <hr className="my-12 border-t border-gray-200" />,
     [BLOCKS.UL_LIST]: (_, children) => (
-      <ul className="list-disc list-inside mb-6 space-y-2 text-gray-700 text-lg font-light">{children}</ul>
+      <ul className="list-disc list-inside mb-6 space-y-2 text-gray-800 text-lg font-normal">{children}</ul>
     ),
     [BLOCKS.OL_LIST]: (_, children) => (
-      <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-700 text-lg font-light">{children}</ol>
+      <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-800 text-lg font-normal">{children}</ol>
     ),
     [BLOCKS.LIST_ITEM]: (_, children) => <li className="mb-2 leading-7">{children}</li>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
@@ -210,7 +210,7 @@ const Post = ({ post, relatedPosts }) => {
       <div className=''>
         <article className="max-w-4xl mx-auto px-6 py-12 mt-8">
           <header className="mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
               {title}
             </h1>
             <div className="flex items-center text-gray-500 text-lg font-light mb-8">
@@ -221,7 +221,7 @@ const Post = ({ post, relatedPosts }) => {
           </header>
 
           {imageUrl && (
-            <div className="relative w-full h-96 md:h-[500px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-full h-64 md:h-80 mb-12 rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src={imageUrl}
                 alt={picture?.fields?.title || title}
@@ -239,7 +239,7 @@ const Post = ({ post, relatedPosts }) => {
           )}
 
           {content ? (
-            <section className="prose text-gray-700 prose-lg max-w-none">
+            <section className="prose prose-lg max-w-none">
               {documentToReactComponents(content, renderOptions)}
             </section>
           ) : (

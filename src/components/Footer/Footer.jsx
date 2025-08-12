@@ -14,15 +14,15 @@ export default function Footer() {
           </div>
           <ul className="flex gap-4 text-sm font-medium">
             <li>
-              <Link href="/terms" className="hover:text-cyan-600 transition">Terms of Use</Link>
+              <Link href="/terms-of-use" className="hover:text-cyan-600 transition">Terms of Use</Link>
             </li>
             <li>
               <Link href="/privacy" className="hover:text-cyan-600 transition">Privacy</Link>
             </li>
           </ul>
         </div>
-        {/* Social Links */}
-      
+       
+        
       </div>
     </footer>
   );
