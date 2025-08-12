@@ -4,12 +4,22 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'], // still needed if you're fetching images from Contentful
   },
+  // Disable experimental features that might cause issues
   experimental: {
-    // Disable lightningcss to avoid deployment issues
     optimizeCss: false,
+    optimizePackageImports: false,
   },
-  // Ensure we're using the stable CSS processing
+  // Ensure we're using the stable build process
   swcMinify: true,
+  // Disable webpack 5 module resolution issues
+  webpack: (config, { isServer }) => {
+    // Fix for CSS processing issues
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;

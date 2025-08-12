@@ -1,20 +1,15 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 export default {
-  // dark class needed.
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
-      // colors: {
-      //   primary: "#7da2a9", 
-      //   secondary: "#f7f7f7",
-      // },
-      // fontFamily: {
-      //   sans: ['var(--font-inter)', 'sans-serif'],
-      //   serif: ['var(--font-lora)', 'serif'],
-      // },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        quicksand: ['Quicksand', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [],
