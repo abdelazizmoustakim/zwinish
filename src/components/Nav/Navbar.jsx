@@ -292,13 +292,13 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden sm:flex items-center gap-4">
-          <ul className="flex gap-4">
+        <div className="hidden sm:flex items-center gap-6">
+          <ul className="flex gap-6">
             
             <li>
               <Link
                 href="/Posts"
-                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-sm font-medium text-stone-600 hover:text-stone-800 transition-colors"
               >
                 Posts
               </Link>
@@ -307,7 +307,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/Zwinish+"
-                className="text-xs font-medium uppercase text-stone-500 hover:text-stone-800 transition-colors"
+                className="text-sm font-medium text-stone-600 hover:text-stone-800 transition-colors"
               >
                 Zwinish +
               </Link>
@@ -325,9 +325,9 @@ export default function Navbar() {
                   onChange={handleSearchInput}
                   onFocus={handleSearchFocus}
                   onBlur={handleSearchBlur}
-                  className="w-64 pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  className="w-56 pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                 />
-                <AiOutlineSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <AiOutlineSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               </div>
             </form>
             {renderSearchResults()}
@@ -428,15 +428,6 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Link
-                    href="/Faq"
-                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
-                    onClick={closeMobileMenu}
-                  >
-                    Faq
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/Zwinish+"
                     className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
                     onClick={closeMobileMenu}
@@ -445,7 +436,6 @@ export default function Navbar() {
                   </Link>
                 </li>
               </ul>
-              
               {/* User Options in Sidebar */}
               <div className="mt-6 pt-4 border-t border-gray-200">
                 {renderMobileUserContent()}

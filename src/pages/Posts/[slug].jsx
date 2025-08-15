@@ -109,6 +109,7 @@ const renderOptions = {
 }
 
 const Post = ({ post, relatedPosts }) => {
+
   if (!post) {
     return <p className="text-center mt-10 text-gray-700">Post not found</p>
   }
@@ -126,6 +127,8 @@ const Post = ({ post, relatedPosts }) => {
   const imageUrl = picture?.fields?.file?.url
     ? `https:${picture.fields.file.url}`
     : null
+
+
 
   // SEO meta tags
   const seoTitle = `${title} | Zwinish - Beautiful Blogging Platform`
@@ -210,9 +213,12 @@ const Post = ({ post, relatedPosts }) => {
       <div className=''>
         <article className="max-w-4xl mx-auto px-6 py-12 mt-8">
           <header className="mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 leading-tight tracking-tight">
-              {title}
-            </h1>
+            <div className="mb-6">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight">
+                {title}
+              </h1>
+            </div>
+            
             <div className="flex items-center text-gray-500 text-lg font-light mb-8">
               <time dateTime={date} className="text-gray-600">
                 {formattedDate}

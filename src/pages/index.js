@@ -2,17 +2,41 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const Homepage = () => {
+  const [isClient, setIsClient] = useState(false);
   
-  const stars = Array.from({ length: 80 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    delay: Math.random() * 3,
-    duration: Math.random() * 4 + 2
-  }));
+  // Ensure client-side only rendering to prevent hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Use deterministic star positions to prevent hydration mismatch
+  const generateStars = () => {
+    const stars = [];
+    for (let i = 0; i < 80; i++) {
+      // Use a deterministic seed based on index
+      const seed = i * 12345;
+      const x = ((seed * 9301 + 49297) % 100);
+      const y = ((seed * 49297 + 9301) % 100);
+      const size = ((seed * 12345) % 4) + 2;
+      const delay = ((seed * 67890) % 3);
+      const duration = ((seed * 13579) % 4) + 2;
+      
+      stars.push({
+        id: i,
+        x: x,
+        y: y,
+        size: size,
+        delay: delay,
+        duration: duration
+      });
+    }
+    return stars;
+  };
+
+  const stars = generateStars();
 
   const starVariants = {
     animate: (custom) => ({
@@ -49,23 +73,26 @@ const Homepage = () => {
       </Head>
       
       <div className="relative overflow-hidden min-h-screen">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {stars.map((star) => (
-            <motion.div
-              key={star.id}
-              className="absolute bg-black rounded-full"
-              style={{
-                left: `${star.x}%`,
-                top: `${star.y}%`,
-                width: `${star.size}px`,
-                height: `${star.size}px`,
-              }}
-              custom={star}
-              variants={starVariants}
-              animate="animate"
-            />
-          ))}
-        </div>
+        {/* Stars animation - only render on client side */}
+        {isClient && (
+          <div className="absolute inset-0 pointer-events-none z-0">
+            {stars.map((star) => (
+              <motion.div
+                key={star.id}
+                className="absolute bg-black rounded-full"
+                style={{
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
+                }}
+                custom={star}
+                variants={starVariants}
+                animate="animate"
+              />
+            ))}
+          </div>
+        )}
 
         <section className="bg-white text-gray-900 relative z-10">
           <div className="container mx-auto flex flex-col items-center px-4 py-16 text-center sm:py-24 sm:px-8 lg:px-20 xl:max-w-3xl">

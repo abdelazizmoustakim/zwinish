@@ -16,6 +16,8 @@ const nextConfig = {
       ...config.resolve.fallback,
       fs: false,
     };
+    // Disable SWC minification to avoid Windows compatibility issues
+    config.optimization.minimize = false;
     return config;
   },
 };

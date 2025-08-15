@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Layout from "../components/Layout/Layout";
 import { AuthProvider } from "../context/AuthContext";
+import ConnectionStatus from "../components/ConnectionStatus";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
@@ -41,6 +42,7 @@ export default function App({ Component, pageProps }) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <ConnectionStatus />
       </AuthProvider>
     </>
   );

@@ -25,7 +25,7 @@ export default function SignupPage() {
       }
       // Create auth user
       const cred = await createUserWithEmailAndPassword(auth, email, password)
-      // Update profile with displayName
+      // Update profileee with displayName
       await updateProfile(cred.user, { displayName: name })
       // Store additional profile in Firestore (non-blocking for UX)
       setSuccess('Account created successfully! Redirecting...')
@@ -41,7 +41,6 @@ export default function SignupPage() {
           createdAt: serverTimestamp(),
         })
       } catch (firestoreErr) {
-        // Firestore write failed silently - user already has success message
       }
     } catch (err) {
       setError(err.message || 'Failed to sign up')
@@ -49,7 +48,6 @@ export default function SignupPage() {
       setLoading(false)
     }
   }
-
   return (
     <section className="container mx-auto px-4 py-16">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 border border-gray-100">
@@ -118,6 +116,3 @@ export default function SignupPage() {
     </section>
   )
 }
-
-
-
