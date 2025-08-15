@@ -280,7 +280,6 @@ export default function Navbar() {
               priority
             />
           </Link>
-          
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
@@ -303,7 +302,14 @@ export default function Navbar() {
                 Posts
               </Link>
             </li>
-           
+            <li>
+              <Link
+                href="/courses"
+                className="text-sm font-medium text-stone-600 hover:text-stone-800 transition-colors"
+              >
+                Courses
+              </Link>
+            </li>
             <li>
               <Link
                 href="/Zwinish+"
@@ -313,7 +319,6 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          
           {/* Search Bar */}
           <div className="relative" ref={searchRef}>
             <form onSubmit={handleSearch} className="relative">
@@ -332,7 +337,6 @@ export default function Navbar() {
             </form>
             {renderSearchResults()}
           </div>
-          
           {/* User Icon / Account Dropdown */}
           <div className="ml-3 relative" ref={dropdownRef}>
             {renderUserContent()}
@@ -349,7 +353,6 @@ export default function Navbar() {
             className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
             onClick={closeMobileMenu}
           />
-          
           {/* Sidebar */}
           <div className="fixed right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
             {/* Sidebar Header */}
@@ -363,7 +366,6 @@ export default function Navbar() {
                 <FiX className="w-5 h-5" />
               </button>
             </div>
-            
             {/* Mobile Search Bar */}
             <div className="p-4 border-b border-gray-200">
               <form onSubmit={handleSearch} className="relative">
@@ -424,6 +426,15 @@ export default function Navbar() {
                     onClick={closeMobileMenu}
                   >
                     Posts
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/courses"
+                    className="block text-base font-medium text-stone-600 hover:text-stone-800 transition-colors py-2 border-b border-gray-100"
+                    onClick={closeMobileMenu}
+                  >
+                    Courses
                   </Link>
                 </li>
                 <li>
