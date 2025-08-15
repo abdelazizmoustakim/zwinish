@@ -193,7 +193,7 @@ export default function Navbar() {
           <button
             key={post.sys.id}
             onClick={() => handleResultClick(post.fields.slug)}
-            className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+            className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 cursor-pointer"
           >
             <div className="font-medium text-sm text-gray-900 mb-1">
               {post.fields.title}
@@ -320,7 +320,7 @@ export default function Navbar() {
             </li>
           </ul>
           {/* Search Bar */}
-          <div className="relative" ref={searchRef}>
+          <div className="relative cursor-pointer" ref={searchRef}>
             <form onSubmit={handleSearch} className="relative">
               <div className="relative">
                 <input
@@ -330,7 +330,7 @@ export default function Navbar() {
                   onChange={handleSearchInput}
                   onFocus={handleSearchFocus}
                   onBlur={handleSearchBlur}
-                  className="w-56 pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  className="w-56 pl-9 pr-3 py-1.5 text-sm border cursor-pointer border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                 />
                 <AiOutlineSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               </div>
@@ -391,7 +391,7 @@ export default function Navbar() {
                         handleResultClick(post.fields.slug);
                         closeMobileMenu();
                       }}
-                      className="w-full text-left px-3 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                      className="w-full text-left px-3 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 cursor-pointer"
                     >
                       <div className="font-medium text-sm text-gray-900 mb-1">
                         {post.fields.title}
